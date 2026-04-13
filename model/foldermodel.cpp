@@ -46,7 +46,8 @@
 #include <QDBusInterface>
 #include <QStandardPaths>
 #include <QApplication>
-#include <QDesktopWidget>
+#include <QScreen>
+#include <QGuiApplication>
 #include <QMimeDatabase>
 #include <QMimeData>
 #include <QClipboard>
@@ -118,9 +119,9 @@ FolderModel::FolderModel(QObject *parent)
 
     m_dirLister = new DirLister(this);
     m_dirLister->setDelayedMimeTypes(true);
-    m_dirLister->setAutoErrorHandlingEnabled(false, nullptr);
+    m_dirLister->setAutoErrorHandlingEnabled(false);
     m_dirLister->setAutoUpdate(true);
-    m_dirLister->setShowingDotFiles(m_showHiddenFiles);
+    m_dirLister->setShowHiddenFiles(m_showHiddenFiles);
     // connect(dirLister, &DirLister::error, this, &FolderModel::notification);
 
     connect(m_dirLister, &KCoreDirLister::started, this, std::bind(&FolderModel::setStatus, this, Status::Listing));
@@ -542,9 +543,9 @@ void FolderModel::setFilterPattern(const QString &pattern)
     m_regExps.reserve(patterns.count());
 
     foreach (const QString &pattern, patterns) {
-        QRegExp rx(pattern);
-        rx.setPatternSyntax(QRegExp::Wildcard);
-        rx.setCaseSensitivity(Qt::CaseInsensitive);
+        QRegularExpression rx(pattern);
+        rx = QRegularExpression(QRegularExpression::wildcardToRegularExpression(rx.pattern()),
+                                    QRegularExpression::CaseInsensitiveOption);
         m_regExps.append(rx);
     }
 
@@ -736,7 +737,7 @@ void FolderModel::refresh()
 
 void FolderModel::undo()
 {
-    if (KIO::FileUndoManager::self()->undoAvailable()) {
+    if (KIO::FileUndoManager::self()->isUndoAvailable()) {
         KIO::FileUndoManager::self()->undo();
     }
 }
@@ -892,8 +893,7 @@ void FolderModel::newFolder()
 
     m_newDocumentUrl = QUrl(rootItem().url().toString() + "/" + newName);
 
-    auto job = KIO::mkdir(QUrl(rootItem().url().toString() + "/" + newName));
-    job->start();
+    QDir().mkdir(rootItem().url().toLocalFile() + "/" + newName);
 }
 
 void FolderModel::newTextFile()
@@ -1108,13 +1108,10 @@ void FolderModel::moveSelectedToTrash()
     }
 
     const QList<QUrl> urls = selectedUrls();
-    KIO::JobUiDelegate uiDelegate;
 
-    if (uiDelegate.askDeleteConfirmation(urls, KIO::JobUiDelegate::Trash, KIO::JobUiDelegate::DefaultConfirmation)) {
-        KIO::Job *job = KIO::trash(urls);
+KIO::Job *job = KIO::trash(urls);
         job->uiDelegate()->setAutoErrorHandlingEnabled(true);
         KIO::FileUndoManager::self()->recordJob(KIO::FileUndoManager::Trash, urls, QUrl(QStringLiteral("trash:/")), job);
-    }
 }
 
 void FolderModel::emptyTrash()
@@ -1694,9 +1691,9 @@ bool FolderModel::matchPattern(const KFileItem &item) const
     }
 
     const QString name = item.name();
-    QListIterator<QRegExp> i(m_regExps);
+    QListIterator<QRegularExpression> i(m_regExps);
     while (i.hasNext()) {
-        if (i.next().exactMatch(name)) {
+        if (i.next().match(name).hasMatch()) {
             return true;
         }
     }
@@ -1714,7 +1711,7 @@ void FolderModel::setShowHiddenFiles(bool showHiddenFiles)
     if (m_showHiddenFiles != showHiddenFiles) {
         m_showHiddenFiles = showHiddenFiles;
 
-        m_dirLister->setShowingDotFiles(m_showHiddenFiles);
+        m_dirLister->setShowHiddenFiles(m_showHiddenFiles);
         m_dirLister->emitChanges();
 
         QSettings settings("cutefishos", qApp->applicationName());
@@ -1756,7 +1753,8 @@ void FolderModel::invalidateFilterIfComplete()
     if (!m_complete)
         return;
 
-    invalidateFilter();
+    beginFilterChange();
+    endFilterChange();
 }
 
 void FolderModel::createActions()

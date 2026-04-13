@@ -117,6 +117,24 @@ void Application::openWindow(const QString &path)
     Window *w = new Window;
     w->rootContext()->setContextProperty("arg", path);
     w->addImageProvider("thumbnailer", new ThumbnailProvider());
+
+    // icontheme provider
+    class IconThemeProvider : public QQuickImageProvider {
+    public:
+        IconThemeProvider() : QQuickImageProvider(QQuickImageProvider::Pixmap) {}
+        QPixmap requestPixmap(const QString &id, QSize *size, const QSize &requestedSize) override {
+            int sz = requestedSize.width() > 0 ? requestedSize.width() : 32;
+            QIcon icon = QIcon::fromTheme(id);
+            if (icon.isNull())
+                icon = QIcon::fromTheme("application-x-generic");
+            if (icon.isNull())
+                icon = QIcon::fromTheme("unknown");
+            QPixmap px = icon.pixmap(sz, sz);
+            if (size) *size = px.size();
+            return px;
+        }
+    };
+    w->addImageProvider("icontheme", new IconThemeProvider());
     w->load(QUrl("qrc:/qml/main.qml"));
 }
 

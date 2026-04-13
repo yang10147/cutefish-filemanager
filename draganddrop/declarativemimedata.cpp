@@ -87,8 +87,8 @@ void DeclarativeMimeData::setUrls(const QJsonArray &urls)
 {
     QList<QUrl> urlList;
     urlList.reserve(urls.size());
-    for (const QVariant &varUrl : urls) {
-        urlList << varUrl.toUrl();
+    for (const auto &varUrl : urls) {
+        urlList << QUrl(varUrl.toString());
     }
     QMimeData::setUrls(urlList);
     Q_EMIT urlsChanged();
@@ -119,9 +119,9 @@ void DeclarativeMimeData::setColor(const QColor &color)
 
 void DeclarativeMimeData::setData(const QString &mimeType, const QVariant &data)
 {
-    if (data.type() == QVariant::ByteArray) {
+    if (data.typeId() == QMetaType::QByteArray) {
         QMimeData::setData(mimeType, data.toByteArray());
-    } else if (data.canConvert(QVariant::String)) {
+    } else if (data.canConvert<QString>()) {
         QMimeData::setData(mimeType, data.toString().toLatin1());
     }
 }

@@ -1,3 +1,4 @@
+#include <KJob>
 /*
  * Copyright (C) 2021 CutefishOS Team.
  *
@@ -28,12 +29,4 @@ DirLister::~DirLister()
 {
 }
 
-void DirLister::handleError(KIO::Job *job)
-{
-    if (!autoErrorHandlingEnabled()) {
-        emit error(job->errorString());
-        return;
-    }
 
-    KDirLister::handleError(job);
-}

@@ -1,30 +1,13 @@
 /*
- * Copyright (C) 2021 CutefishOS Team.
- *
- * Author:     revenmartin <revenmartin@gmail.com>
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * Qt6/Wayland port 2026 - FishUI 已移除
+ * Dock margins: Dock C++ 对象仍然存在，保留引用；若不可用则 fallback 0
  */
 
-import QtQuick 2.12
-import QtQuick.Controls 2.12
-import QtQuick.Layouts 1.12
-import QtQuick.Window 2.12
-import QtGraphicalEffects 1.0
+import QtQuick
+import QtQuick.Controls
+import Qt5Compat.GraphicalEffects
 
 import Cutefish.FileManager 1.0 as FM
-import FishUI 1.0 as FishUI
 import "../"
 
 Item {
@@ -33,13 +16,9 @@ Item {
     LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
     LayoutMirroring.childrenInherit: true
 
-    GlobalSettings {
-        id: globalSettings
-    }
+    GlobalSettings { id: globalSettings }
 
-    Wallpaper {
-        anchors.fill: parent
-    }
+    Wallpaper { anchors.fill: parent }
 
     FM.FolderModel {
         id: dirModel
@@ -80,21 +59,18 @@ Item {
 
         ScrollBar.vertical.policy: ScrollBar.AlwaysOff
 
-        // Handle for topbar
         topMargin: 28
 
-        // From dock
-        leftMargin: Dock.leftMargin
-        rightMargin: Dock.rightMargin
-        bottomMargin: Dock.bottomMargin
+        // Dock margins — 若 Dock 未定义则使用 0
+        leftMargin:   typeof Dock !== "undefined" ? Dock.leftMargin   : 0
+        rightMargin:  typeof Dock !== "undefined" ? Dock.rightMargin  : 0
+        bottomMargin: typeof Dock !== "undefined" ? Dock.bottomMargin : 0
 
         flow: GridView.FlowTopToBottom
 
         delegate: FolderGridItem {}
 
-        onIconSizeChanged: {
-            globalSettings.desktopIconSize = _folderView.iconSize
-        }
+        onIconSizeUpdated: globalSettings.desktopIconSize = iconSize
 
         onActiveFocusChanged: {
             if (!activeFocus) {
@@ -111,76 +87,38 @@ Item {
     FM.ShortCut {
         id: shortCut
 
-        Component.onCompleted: {
-            shortCut.install(_folderView)
-        }
+        Component.onCompleted: shortCut.install(_folderView)
 
-        onOpen: {
-            dirModel.openSelected()
-        }
-        onCopy: {
-            dirModel.copy()
-        }
-        onCut: {
-            dirModel.cut()
-        }
-        onPaste: {
-            dirModel.paste()
-        }
-        onRename: {
-            dirModel.requestRename()
-        }
-        onOpenPathEditor: {
-            folderPage.requestPathEditor()
-        }
-        onSelectAll: {
-            dirModel.selectAll()
-        }
-        onDeleteFile: {
-            dirModel.keyDeletePress()
-        }
-        onKeyPressed: {
-            dirModel.keyboardSearch(text)
-        }
-        onShowHidden: {
-            dirModel.showHiddenFiles = !dirModel.showHiddenFiles
-        }
-        onUndo: {
-            dirModel.undo()
-        }
+        onOpen:      dirModel.openSelected()
+        onCopy:      dirModel.copy()
+        onCut:       dirModel.cut()
+        onPaste:     dirModel.paste()
+        onRename:    dirModel.requestRename()
+        onSelectAll: dirModel.selectAll()
+        onDeleteFile: dirModel.keyDeletePress()
+        onKeyPressed: (text) => dirModel.keyboardSearch(text)
+        onShowHidden: dirModel.showHiddenFiles = !dirModel.showHiddenFiles
+        onUndo:      dirModel.undo()
     }
 
     Component {
         id: rubberBandObject
 
         FM.RubberBand {
-            id: rubberBand
+            width: 0; height: 0; z: 99999
+            color: Theme.highlightColor
 
-            width: 0
-            height: 0
-            z: 99999
-            color: FishUI.Theme.highlightColor
-
-            function close() {
-                opacityAnimation.restart()
-            }
+            function close() { opacityAnimation.restart() }
 
             OpacityAnimator {
                 id: opacityAnimation
-                target: rubberBand
-                to: 0
-                from: 1
-                duration: 150
-
-                easing {
-                    bezierCurve: [0.4, 0.0, 1, 1]
-                    type: Easing.Bezier
-                }
-
+                target: parent
+                to: 0; from: 1; duration: 150
+                easing { bezierCurve: [0.4, 0.0, 1, 1]; type: Easing.Bezier }
                 onFinished: {
-                    rubberBand.visible = false
-                    rubberBand.enabled = false
-                    rubberBand.destroy()
+                    parent.visible = false
+                    parent.enabled = false
+                    parent.destroy()
                 }
             }
         }

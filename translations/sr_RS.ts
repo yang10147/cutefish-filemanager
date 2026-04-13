@@ -4,22 +4,22 @@
 <context>
     <name>CreateFolderDialog</name>
     <message>
-        <location filename="../qml/Dialogs/CreateFolderDialog.qml" line="28"/>
+        <location filename="../qml/Dialogs/CreateFolderDialog.qml" line="15"/>
         <source>New folder name</source>
         <translation>Naziv nove fascikle</translation>
     </message>
     <message>
-        <location filename="../qml/Dialogs/CreateFolderDialog.qml" line="55"/>
+        <location filename="../qml/Dialogs/CreateFolderDialog.qml" line="39"/>
         <source>New folder</source>
         <translation>Nova fascikla</translation>
     </message>
     <message>
-        <location filename="../qml/Dialogs/CreateFolderDialog.qml" line="79"/>
+        <location filename="../qml/Dialogs/CreateFolderDialog.qml" line="56"/>
         <source>Cancel</source>
         <translation>Otkaži</translation>
     </message>
     <message>
-        <location filename="../qml/Dialogs/CreateFolderDialog.qml" line="85"/>
+        <location filename="../qml/Dialogs/CreateFolderDialog.qml" line="62"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
@@ -65,17 +65,19 @@
 <context>
     <name>DeleteDialog</name>
     <message>
-        <location filename="../qml/Dialogs/DeleteDialog.qml" line="47"/>
+        <location filename="../qml/Dialogs/DeleteDialog.qml" line="36"/>
         <source>Do you want to delete it permanently?</source>
         <translation>Da li želite trajno ovo da obrišete?</translation>
     </message>
     <message>
-        <location filename="../qml/Dialogs/DeleteDialog.qml" line="56"/>
+        <location filename="../qml/Dialogs/DeleteDialog.qml" line="45"/>
         <source>Cancel</source>
         <translation>Otkaži</translation>
     </message>
     <message>
-        <location filename="../qml/Dialogs/DeleteDialog.qml" line="62"/>
+        <location filename="../qml/Dialogs/DeleteDialog.qml" line="16"/>
+        <location filename="../qml/Dialogs/DeleteDialog.qml" line="51"/>
+        <location filename="../qml/Dialogs/DeleteDialog.qml" line="51"/>
         <source>Delete</source>
         <translation>Obriši</translation>
     </message>
@@ -83,7 +85,7 @@
 <context>
     <name>DesktopView</name>
     <message>
-        <location filename="../desktop/desktopview.cpp" line="44"/>
+        <location filename="../desktop/desktopview.cpp" line="48"/>
         <source>Desktop</source>
         <translation>Radna površina</translation>
     </message>
@@ -91,22 +93,22 @@
 <context>
     <name>EmptyTrashDialog</name>
     <message>
-        <location filename="../qml/Dialogs/EmptyTrashDialog.qml" line="30"/>
+        <location filename="../qml/Dialogs/EmptyTrashDialog.qml" line="16"/>
         <source>File Manager</source>
         <translation>Upravljač datoteka</translation>
     </message>
     <message>
-        <location filename="../qml/Dialogs/EmptyTrashDialog.qml" line="60"/>
+        <location filename="../qml/Dialogs/EmptyTrashDialog.qml" line="40"/>
         <source>Do you want to permanently delete all files from the Trash?</source>
         <translation>Želite li trajno obrisati sve fajlove iz Smeća?</translation>
     </message>
     <message>
-        <location filename="../qml/Dialogs/EmptyTrashDialog.qml" line="69"/>
+        <location filename="../qml/Dialogs/EmptyTrashDialog.qml" line="49"/>
         <source>Cancel</source>
         <translation>Otkaži</translation>
     </message>
     <message>
-        <location filename="../qml/Dialogs/EmptyTrashDialog.qml" line="75"/>
+        <location filename="../qml/Dialogs/EmptyTrashDialog.qml" line="55"/>
         <source>Empty Trash</source>
         <translation>Isprazni smeće</translation>
     </message>
@@ -114,12 +116,12 @@
 <context>
     <name>FilePropertiesDialog</name>
     <message>
-        <location filename="../dialogs/filepropertiesdialog.cpp" line="185"/>
+        <location filename="../dialogs/filepropertiesdialog.cpp" line="193"/>
         <source>Properties</source>
         <translation>Svojstva</translation>
     </message>
     <message>
-        <location filename="../dialogs/filepropertiesdialog.cpp" line="233"/>
+        <location filename="../dialogs/filepropertiesdialog.cpp" line="246"/>
         <source>%1 files</source>
         <translation>%1 datoteka</translation>
     </message>
@@ -127,196 +129,225 @@
 <context>
     <name>FolderModel</name>
     <message>
-        <location filename="../model/foldermodel.cpp" line="202"/>
+        <location filename="../model/foldermodel.cpp" line="277"/>
         <source>%1 item</source>
         <translation>%1 stavka</translation>
     </message>
     <message>
-        <location filename="../model/foldermodel.cpp" line="202"/>
+        <location filename="../model/foldermodel.cpp" line="277"/>
         <source>%1 items</source>
         <translation>%1 stavki</translation>
     </message>
     <message>
-        <location filename="../model/foldermodel.cpp" line="267"/>
+        <location filename="../model/foldermodel.cpp" line="382"/>
         <source>The file or folder %1 does not exist.</source>
         <translation>Datoteka ili fascikla %1 ne postoji.</translation>
     </message>
     <message>
-        <location filename="../model/foldermodel.cpp" line="999"/>
+        <location filename="../model/foldermodel.cpp" line="1269"/>
         <source>Select All</source>
         <translation>Izaberi sve</translation>
     </message>
     <message>
-        <location filename="../model/foldermodel.cpp" line="1108"/>
         <source>File Manager</source>
-        <translation>Upravljač datotekama</translation>
+        <translation type="vanished">Upravljač datotekama</translation>
     </message>
     <message>
-        <location filename="../model/foldermodel.cpp" line="1359"/>
+        <location filename="../model/foldermodel.cpp" line="1762"/>
         <source>Open</source>
         <translation>Otvori</translation>
     </message>
     <message>
-        <location filename="../model/foldermodel.cpp" line="1362"/>
+        <location filename="../model/foldermodel.cpp" line="1765"/>
         <source>Open with</source>
         <translation>Otvori pomoću</translation>
     </message>
     <message>
-        <location filename="../model/foldermodel.cpp" line="1365"/>
+        <location filename="../model/foldermodel.cpp" line="1768"/>
         <source>Cut</source>
         <translation>Iseci</translation>
     </message>
     <message>
-        <location filename="../model/foldermodel.cpp" line="1368"/>
+        <location filename="../model/foldermodel.cpp" line="1771"/>
         <source>Copy</source>
         <translation>Kopiraj</translation>
     </message>
     <message>
-        <location filename="../model/foldermodel.cpp" line="1371"/>
+        <location filename="../model/foldermodel.cpp" line="1774"/>
         <source>Paste</source>
         <translation>Zalepi</translation>
     </message>
     <message>
-        <location filename="../model/foldermodel.cpp" line="1374"/>
+        <location filename="../model/foldermodel.cpp" line="881"/>
+        <location filename="../model/foldermodel.cpp" line="1777"/>
         <source>New Folder</source>
         <translation>Nova fascikla</translation>
     </message>
     <message>
-        <location filename="../model/foldermodel.cpp" line="1377"/>
+        <location filename="../model/foldermodel.cpp" line="902"/>
+        <location filename="../model/foldermodel.cpp" line="1781"/>
+        <source>New Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../model/foldermodel.cpp" line="1275"/>
+        <location filename="../model/foldermodel.cpp" line="1780"/>
+        <source>New Documents</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../model/foldermodel.cpp" line="1785"/>
         <source>Move To Trash</source>
         <translation>Premesti u smeće</translation>
     </message>
     <message>
-        <location filename="../model/foldermodel.cpp" line="1380"/>
+        <location filename="../model/foldermodel.cpp" line="1788"/>
         <source>Empty Trash</source>
         <translation>Isprazni smeće</translation>
     </message>
     <message>
-        <location filename="../model/foldermodel.cpp" line="1383"/>
+        <location filename="../model/foldermodel.cpp" line="1791"/>
         <source>Delete</source>
         <translation>Obriši</translation>
     </message>
     <message>
-        <location filename="../model/foldermodel.cpp" line="1386"/>
+        <location filename="../model/foldermodel.cpp" line="1794"/>
         <source>Rename</source>
         <translation>Preimenuj</translation>
     </message>
     <message>
-        <location filename="../model/foldermodel.cpp" line="1389"/>
+        <location filename="../model/foldermodel.cpp" line="1797"/>
         <source>Open in Terminal</source>
         <translation>Otvori u terminalu</translation>
     </message>
     <message>
-        <location filename="../model/foldermodel.cpp" line="1392"/>
+        <location filename="../model/foldermodel.cpp" line="1800"/>
         <source>Set as Wallpaper</source>
         <translation>Postavi kao pozadinu</translation>
     </message>
     <message>
-        <location filename="../model/foldermodel.cpp" line="1395"/>
+        <location filename="../model/foldermodel.cpp" line="1803"/>
         <source>Properties</source>
         <translation>Svojstva</translation>
     </message>
     <message>
-        <location filename="../model/foldermodel.cpp" line="1398"/>
+        <location filename="../model/foldermodel.cpp" line="1806"/>
         <source>Change background</source>
         <translation>Promeni pozadinu</translation>
     </message>
     <message>
-        <location filename="../model/foldermodel.cpp" line="1401"/>
+        <location filename="../model/foldermodel.cpp" line="1809"/>
         <source>Restore</source>
         <translation type="unfinished">Obnovi</translation>
     </message>
     <message>
-        <location filename="../model/foldermodel.cpp" line="1404"/>
+        <location filename="../model/foldermodel.cpp" line="1812"/>
         <source>Show hidden files</source>
         <translation>Prikaži skrivene datoteke</translation>
+    </message>
+    <message>
+        <location filename="../model/foldermodel.cpp" line="1817"/>
+        <source>Open in new window</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>FolderPage</name>
     <message>
-        <location filename="../qml/FolderPage.qml" line="136"/>
+        <location filename="../qml/FolderPage.qml" line="85"/>
         <source>Empty folder</source>
         <translation>Prazna fascikla</translation>
     </message>
     <message>
-        <location filename="../qml/FolderPage.qml" line="177"/>
+        <location filename="../qml/FolderPage.qml" line="164"/>
         <source>Open</source>
         <translation>Otvori</translation>
     </message>
     <message>
-        <location filename="../qml/FolderPage.qml" line="61"/>
-        <location filename="../qml/FolderPage.qml" line="182"/>
+        <location filename="../qml/FolderPage.qml" line="42"/>
+        <location filename="../qml/FolderPage.qml" line="168"/>
+        <location filename="../qml/FolderPage.qml" line="168"/>
         <source>Properties</source>
         <translation>Svojstva</translation>
     </message>
     <message>
-        <location filename="../qml/FolderPage.qml" line="51"/>
+        <location filename="../qml/FolderPage.qml" line="39"/>
         <source>File</source>
         <translation>Datoteka</translation>
     </message>
     <message>
-        <location filename="../qml/FolderPage.qml" line="54"/>
+        <location filename="../qml/FolderPage.qml" line="40"/>
         <source>New Folder</source>
         <translation>Nova fascikla</translation>
     </message>
     <message>
-        <location filename="../qml/FolderPage.qml" line="68"/>
+        <location filename="../qml/FolderPage.qml" line="44"/>
         <source>Quit</source>
         <translation>Odustani</translation>
     </message>
     <message>
-        <location filename="../qml/FolderPage.qml" line="74"/>
+        <location filename="../qml/FolderPage.qml" line="47"/>
         <source>Edit</source>
         <translation>Uredi</translation>
     </message>
     <message>
-        <location filename="../qml/FolderPage.qml" line="77"/>
+        <location filename="../qml/FolderPage.qml" line="48"/>
         <source>Select All</source>
         <translation>Izaberi sve</translation>
     </message>
     <message>
-        <location filename="../qml/FolderPage.qml" line="84"/>
+        <location filename="../qml/FolderPage.qml" line="50"/>
         <source>Cut</source>
         <translation>Iseci</translation>
     </message>
     <message>
-        <location filename="../qml/FolderPage.qml" line="89"/>
+        <location filename="../qml/FolderPage.qml" line="51"/>
         <source>Copy</source>
         <translation>Kopiraj</translation>
     </message>
     <message>
-        <location filename="../qml/FolderPage.qml" line="94"/>
+        <location filename="../qml/FolderPage.qml" line="52"/>
         <source>Paste</source>
         <translation>Zalepi</translation>
     </message>
     <message>
-        <location filename="../qml/FolderPage.qml" line="100"/>
+        <location filename="../qml/FolderPage.qml" line="55"/>
         <source>Help</source>
         <translation>Pomoć</translation>
     </message>
     <message>
-        <location filename="../qml/FolderPage.qml" line="103"/>
+        <location filename="../qml/FolderPage.qml" line="56"/>
         <source>About</source>
         <translation>O Aplikaciji</translation>
     </message>
     <message>
-        <location filename="../qml/FolderPage.qml" line="244"/>
+        <location filename="../qml/FolderPage.qml" line="63"/>
+        <source>About File Manager</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/FolderPage.qml" line="68"/>
+        <source>File Manager
+A file manager designed for CutefishOS.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/FolderPage.qml" line="224"/>
         <source>%1 item</source>
         <translation>%1 stavka</translation>
     </message>
     <message>
-        <location filename="../qml/FolderPage.qml" line="245"/>
+        <location filename="../qml/FolderPage.qml" line="225"/>
         <source>%1 items</source>
         <translation>%1 stavki</translation>
     </message>
     <message>
-        <location filename="../qml/FolderPage.qml" line="251"/>
+        <location filename="../qml/FolderPage.qml" line="230"/>
         <source>%1 selected</source>
         <translation>%1 odabrano</translation>
     </message>
     <message>
-        <location filename="../qml/FolderPage.qml" line="266"/>
+        <location filename="../qml/FolderPage.qml" line="250"/>
         <source>Empty Trash</source>
         <translation>Isprazni smeće</translation>
     </message>
@@ -324,22 +355,22 @@
 <context>
     <name>OpenWithDialog</name>
     <message>
-        <location filename="../qml/Dialogs/OpenWithDialog.qml" line="78"/>
+        <location filename="../qml/Dialogs/OpenWithDialog.qml" line="73"/>
         <source>No applications</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Dialogs/OpenWithDialog.qml" line="142"/>
+        <location filename="../qml/Dialogs/OpenWithDialog.qml" line="136"/>
         <source>Set as default</source>
         <translation>Postavi kao podrazumevano</translation>
     </message>
     <message>
-        <location filename="../qml/Dialogs/OpenWithDialog.qml" line="151"/>
+        <location filename="../qml/Dialogs/OpenWithDialog.qml" line="150"/>
         <source>Cancel</source>
         <translation>Otkaži</translation>
     </message>
     <message>
-        <location filename="../qml/Dialogs/OpenWithDialog.qml" line="160"/>
+        <location filename="../qml/Dialogs/OpenWithDialog.qml" line="159"/>
         <source>Open</source>
         <translation>Otvori</translation>
     </message>
@@ -352,32 +383,32 @@
 <context>
     <name>OptionsMenu</name>
     <message>
-        <location filename="../qml/OptionsMenu.qml" line="47"/>
+        <location filename="../qml/OptionsMenu.qml" line="21"/>
         <source>Icons</source>
         <translation>Ikone</translation>
     </message>
     <message>
-        <location filename="../qml/OptionsMenu.qml" line="85"/>
+        <location filename="../qml/OptionsMenu.qml" line="42"/>
         <source>List</source>
         <translation>Spisak</translation>
     </message>
     <message>
-        <location filename="../qml/OptionsMenu.qml" line="127"/>
+        <location filename="../qml/OptionsMenu.qml" line="58"/>
         <source>Name</source>
         <translation>Ime</translation>
     </message>
     <message>
-        <location filename="../qml/OptionsMenu.qml" line="165"/>
+        <location filename="../qml/OptionsMenu.qml" line="72"/>
         <source>Date</source>
         <translation>Datum</translation>
     </message>
     <message>
-        <location filename="../qml/OptionsMenu.qml" line="189"/>
+        <location filename="../qml/OptionsMenu.qml" line="86"/>
         <source>Type</source>
         <translation type="unfinished">Tip</translation>
     </message>
     <message>
-        <location filename="../qml/OptionsMenu.qml" line="227"/>
+        <location filename="../qml/OptionsMenu.qml" line="100"/>
         <source>Size</source>
         <translation>Veličina</translation>
     </message>
@@ -426,63 +457,91 @@
     </message>
     <message>
         <location filename="../model/placesmodel.cpp" line="117"/>
-        <location filename="../model/placesmodel.cpp" line="265"/>
+        <location filename="../model/placesmodel.cpp" line="288"/>
         <source>Drives</source>
         <translation>Diskovi</translation>
+    </message>
+    <message>
+        <location filename="../model/placesmodel.cpp" line="169"/>
+        <source>Computer</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>PropertiesDialog</name>
     <message>
-        <location filename="../qml/Dialogs/PropertiesDialog.qml" line="94"/>
+        <location filename="../qml/Dialogs/PropertiesDialog.qml" line="76"/>
         <source>Type:</source>
         <translation>Vrsta:</translation>
     </message>
     <message>
-        <location filename="../qml/Dialogs/PropertiesDialog.qml" line="107"/>
+        <location filename="../qml/Dialogs/PropertiesDialog.qml" line="79"/>
         <source>Location:</source>
         <translation>Lokacija:</translation>
     </message>
     <message>
-        <location filename="../qml/Dialogs/PropertiesDialog.qml" line="118"/>
+        <location filename="../qml/Dialogs/PropertiesDialog.qml" line="82"/>
         <source>Size:</source>
         <translation>Veličina:</translation>
     </message>
     <message>
-        <location filename="../qml/Dialogs/PropertiesDialog.qml" line="125"/>
+        <location filename="../qml/Dialogs/PropertiesDialog.qml" line="83"/>
         <source>Calculating...</source>
         <translation>Računanje...</translation>
     </message>
     <message>
-        <location filename="../qml/Dialogs/PropertiesDialog.qml" line="129"/>
+        <location filename="../qml/Dialogs/PropertiesDialog.qml" line="85"/>
         <source>Created:</source>
         <translation>Napravljeno:</translation>
     </message>
     <message>
-        <location filename="../qml/Dialogs/PropertiesDialog.qml" line="142"/>
+        <location filename="../qml/Dialogs/PropertiesDialog.qml" line="88"/>
         <source>Modified:</source>
         <translation>Izmenjeno:</translation>
     </message>
     <message>
-        <location filename="../qml/Dialogs/PropertiesDialog.qml" line="155"/>
+        <location filename="../qml/Dialogs/PropertiesDialog.qml" line="91"/>
         <source>Accessed:</source>
         <translation>Pristupljeno:</translation>
     </message>
     <message>
-        <location filename="../qml/Dialogs/PropertiesDialog.qml" line="177"/>
+        <location filename="../qml/Dialogs/PropertiesDialog.qml" line="102"/>
         <source>Cancel</source>
         <translation>Otkaži</translation>
     </message>
     <message>
-        <location filename="../qml/Dialogs/PropertiesDialog.qml" line="183"/>
+        <location filename="../qml/Dialogs/PropertiesDialog.qml" line="108"/>
         <source>OK</source>
         <translation>U redu</translation>
     </message>
 </context>
 <context>
+    <name>SideBar</name>
+    <message>
+        <location filename="../qml/SideBar.qml" line="116"/>
+        <source>Open</source>
+        <translation type="unfinished">Otvori</translation>
+    </message>
+    <message>
+        <location filename="../qml/SideBar.qml" line="126"/>
+        <source>Open in new window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/SideBar.qml" line="136"/>
+        <source>Eject</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/SideBar.qml" line="144"/>
+        <source>Unmount</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>main</name>
     <message>
-        <location filename="../qml/main.qml" line="35"/>
+        <location filename="../qml/main.qml" line="20"/>
         <source>File Manager</source>
         <translation>Upravljač datotekama</translation>
     </message>

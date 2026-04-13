@@ -1,38 +1,24 @@
 /*
- * Copyright (C) 2021 CutefishOS Team.
- *
- * Author:     revenmartin <revenmartin@gmail.com>
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * Qt6/Wayland port 2026 - FishUI 已移除
+ * FishUI.IconItem → Image with icontheme
  */
 
-import QtQuick 2.12
-import QtQuick.Window 2.12
-import QtQuick.Controls 2.12
-import QtQuick.Layouts 1.12
-import FishUI 1.0 as FishUI
+import QtQuick
+import "../"
+import QtQuick.Controls
+import QtQuick.Window
+import QtQuick.Layouts
 
 Item {
     id: control
 
-    property int widthValue: _mainLayout.implicitWidth + FishUI.Units.largeSpacing * 3
-    property int heightValue: _mainLayout.implicitHeight + FishUI.Units.largeSpacing * 3
+    property int widthValue: _mainLayout.implicitWidth + Theme.largeSpacing * 3
+    property int heightValue: _mainLayout.implicitHeight + Theme.largeSpacing * 3
 
     width: widthValue
     height: heightValue
 
-    onWidthValueChanged: main.updateSize(widthValue, heightValue)
+    onWidthValueChanged:  main.updateSize(widthValue, heightValue)
     onHeightValueChanged: main.updateSize(widthValue, heightValue)
 
     focus: true
@@ -41,40 +27,33 @@ Item {
 
     Rectangle {
         anchors.fill: parent
-        color: FishUI.Theme.secondBackgroundColor
+        color: Theme.secondBackgroundColor
     }
 
     onVisibleChanged: {
-        if (visible) updateWindowSize()
-    }
-
-    function close() {
-        main.close()
-    }
-
-    function updateWindowSize() {
-        if (visible) {
-            if (_textField.enabled)
-                _textField.forceActiveFocus()
-        }
+        if (visible && _textField.enabled)
+            _textField.forceActiveFocus()
     }
 
     ColumnLayout {
         id: _mainLayout
         anchors.fill: parent
-        anchors.leftMargin: FishUI.Units.largeSpacing * 1.5
-        anchors.rightMargin: FishUI.Units.largeSpacing * 1.5
-        anchors.topMargin: FishUI.Units.smallSpacing
-        anchors.bottomMargin: FishUI.Units.largeSpacing * 1.5
-        spacing: FishUI.Units.largeSpacing
+        anchors.leftMargin: Theme.largeSpacing * 1.5
+        anchors.rightMargin: Theme.largeSpacing * 1.5
+        anchors.topMargin: Theme.smallSpacing
+        anchors.bottomMargin: Theme.largeSpacing * 1.5
+        spacing: Theme.largeSpacing
 
         RowLayout {
-            spacing: FishUI.Units.largeSpacing * 2
+            spacing: Theme.largeSpacing * 2
 
-            FishUI.IconItem {
-                width: 64
-                height: 64
-                source: main.iconName
+            // FishUI.IconItem → Image
+            Image {
+                width: 64; height: 64
+                sourceSize: Qt.size(64, 64)
+                source: "image://icontheme/" + main.iconName
+                smooth: true
+                antialiasing: true
             }
 
             TextField {
@@ -82,6 +61,7 @@ Item {
                 text: main.fileName
                 focus: true
                 Layout.fillWidth: true
+                selectByMouse: true
                 Keys.onEscapePressed: main.reject()
                 enabled: main.isWritable
             }
@@ -89,95 +69,34 @@ Item {
 
         GridLayout {
             columns: 2
-            columnSpacing: FishUI.Units.largeSpacing
-            rowSpacing: FishUI.Units.largeSpacing
+            columnSpacing: Theme.largeSpacing
+            rowSpacing: Theme.largeSpacing
             Layout.alignment: Qt.AlignTop
 
-            onHeightChanged: updateWindowSize()
-            onImplicitHeightChanged: updateWindowSize()
+            Label { text: qsTr("Type:");     Layout.alignment: Qt.AlignRight; color: Theme.disabledTextColor; visible: mimeType.visible }
+            Label { id: mimeType;            text: main.mimeType;    visible: text.length > 0 }
 
-            Label {
-                text: qsTr("Type:")
-                Layout.alignment: Qt.AlignRight
-                color: FishUI.Theme.disabledTextColor
-                visible: mimeType.visible
-            }
+            Label { text: qsTr("Location:"); Layout.alignment: Qt.AlignRight; color: Theme.disabledTextColor }
+            Label { text: main.location }
 
-            Label {
-                id: mimeType
-                text: main.mimeType
-                visible: text
-            }
+            Label { text: qsTr("Size:");     Layout.alignment: Qt.AlignRight; color: Theme.disabledTextColor }
+            Label { text: main.fileSize ? main.fileSize : qsTr("Calculating...") }
 
-            Label {
-                text: qsTr("Location:")
-                Layout.alignment: Qt.AlignRight
-                color: FishUI.Theme.disabledTextColor
-            }
+            Label { text: qsTr("Created:");  Layout.alignment: Qt.AlignRight; color: Theme.disabledTextColor; visible: creationTime.visible }
+            Label { id: creationTime;        text: main.creationTime; visible: text.length > 0 }
 
-            Label {
-                id: location
-                text: main.location
-            }
+            Label { text: qsTr("Modified:"); Layout.alignment: Qt.AlignRight; color: Theme.disabledTextColor; visible: modifiedTime.visible }
+            Label { id: modifiedTime;        text: main.modifiedTime; visible: text.length > 0 }
 
-            Label {
-                text: qsTr("Size:")
-                Layout.alignment: Qt.AlignRight
-                color: FishUI.Theme.disabledTextColor
-            }
-
-            Label {
-                id: size
-                text: main.fileSize ? main.fileSize : qsTr("Calculating...")
-            }
-
-            Label {
-                text: qsTr("Created:")
-                Layout.alignment: Qt.AlignRight
-                color: FishUI.Theme.disabledTextColor
-                visible: creationTime.visible
-            }
-
-            Label {
-                id: creationTime
-                text: main.creationTime
-                visible: text
-            }
-
-            Label {
-                text: qsTr("Modified:")
-                Layout.alignment: Qt.AlignRight
-                color: FishUI.Theme.disabledTextColor
-                visible: modifiedTime.visible
-            }
-
-            Label {
-                id: modifiedTime
-                text: main.modifiedTime
-                visible: text
-            }
-
-            Label {
-                text: qsTr("Accessed:")
-                Layout.alignment: Qt.AlignRight
-                color: FishUI.Theme.disabledTextColor
-                visible: accessTime.visible
-            }
-
-            Label {
-                id: accessTime
-                text: main.accessedTime
-                visible: text
-            }
+            Label { text: qsTr("Accessed:"); Layout.alignment: Qt.AlignRight; color: Theme.disabledTextColor; visible: accessTime.visible }
+            Label { id: accessTime;          text: main.accessedTime; visible: text.length > 0 }
         }
 
-        Item {
-            height: FishUI.Units.smallSpacing
-        }
+        Item { height: Theme.smallSpacing }
 
         RowLayout {
             Layout.alignment: Qt.AlignRight
-            spacing: FishUI.Units.largeSpacing
+            spacing: Theme.largeSpacing
 
             Button {
                 text: qsTr("Cancel")
@@ -188,10 +107,8 @@ Item {
             Button {
                 text: qsTr("OK")
                 Layout.fillWidth: true
-                onClicked: {
-                    main.accept(_textField.text)
-                }
-                flat: true
+                highlighted: true
+                onClicked: main.accept(_textField.text)
             }
         }
     }

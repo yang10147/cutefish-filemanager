@@ -4,22 +4,22 @@
 <context>
     <name>CreateFolderDialog</name>
     <message>
-        <location filename="../qml/Dialogs/CreateFolderDialog.qml" line="28"/>
+        <location filename="../qml/Dialogs/CreateFolderDialog.qml" line="15"/>
         <source>New folder name</source>
         <translation>新建文件夹名称</translation>
     </message>
     <message>
-        <location filename="../qml/Dialogs/CreateFolderDialog.qml" line="55"/>
+        <location filename="../qml/Dialogs/CreateFolderDialog.qml" line="39"/>
         <source>New folder</source>
         <translation>新建文件夹</translation>
     </message>
     <message>
-        <location filename="../qml/Dialogs/CreateFolderDialog.qml" line="81"/>
+        <location filename="../qml/Dialogs/CreateFolderDialog.qml" line="56"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../qml/Dialogs/CreateFolderDialog.qml" line="87"/>
+        <location filename="../qml/Dialogs/CreateFolderDialog.qml" line="62"/>
         <source>OK</source>
         <translation>确定</translation>
     </message>
@@ -65,17 +65,19 @@
 <context>
     <name>DeleteDialog</name>
     <message>
-        <location filename="../qml/Dialogs/DeleteDialog.qml" line="47"/>
+        <location filename="../qml/Dialogs/DeleteDialog.qml" line="36"/>
         <source>Do you want to delete it permanently?</source>
         <translation>是否要永久删除？</translation>
     </message>
     <message>
-        <location filename="../qml/Dialogs/DeleteDialog.qml" line="56"/>
+        <location filename="../qml/Dialogs/DeleteDialog.qml" line="45"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../qml/Dialogs/DeleteDialog.qml" line="62"/>
+        <location filename="../qml/Dialogs/DeleteDialog.qml" line="16"/>
+        <location filename="../qml/Dialogs/DeleteDialog.qml" line="51"/>
+        <location filename="../qml/Dialogs/DeleteDialog.qml" line="51"/>
         <source>Delete</source>
         <translation>删除</translation>
     </message>
@@ -83,7 +85,7 @@
 <context>
     <name>DesktopView</name>
     <message>
-        <location filename="../desktop/desktopview.cpp" line="46"/>
+        <location filename="../desktop/desktopview.cpp" line="48"/>
         <source>Desktop</source>
         <translation>桌面</translation>
     </message>
@@ -91,22 +93,22 @@
 <context>
     <name>EmptyTrashDialog</name>
     <message>
-        <location filename="../qml/Dialogs/EmptyTrashDialog.qml" line="30"/>
+        <location filename="../qml/Dialogs/EmptyTrashDialog.qml" line="16"/>
         <source>File Manager</source>
         <translation>文件管理器</translation>
     </message>
     <message>
-        <location filename="../qml/Dialogs/EmptyTrashDialog.qml" line="77"/>
+        <location filename="../qml/Dialogs/EmptyTrashDialog.qml" line="40"/>
         <source>Do you want to permanently delete all files from the Trash?</source>
         <translation>是否要从回收站中永久删除所有文件？</translation>
     </message>
     <message>
-        <location filename="../qml/Dialogs/EmptyTrashDialog.qml" line="86"/>
+        <location filename="../qml/Dialogs/EmptyTrashDialog.qml" line="49"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../qml/Dialogs/EmptyTrashDialog.qml" line="92"/>
+        <location filename="../qml/Dialogs/EmptyTrashDialog.qml" line="55"/>
         <source>Empty Trash</source>
         <translation>清空回收站</translation>
     </message>
@@ -114,12 +116,12 @@
 <context>
     <name>FilePropertiesDialog</name>
     <message>
-        <location filename="../dialogs/filepropertiesdialog.cpp" line="192"/>
+        <location filename="../dialogs/filepropertiesdialog.cpp" line="193"/>
         <source>Properties</source>
         <translation>属性</translation>
     </message>
     <message>
-        <location filename="../dialogs/filepropertiesdialog.cpp" line="245"/>
+        <location filename="../dialogs/filepropertiesdialog.cpp" line="246"/>
         <source>%1 files</source>
         <translation>%1 项</translation>
     </message>
@@ -127,125 +129,124 @@
 <context>
     <name>FolderModel</name>
     <message>
-        <location filename="../model/foldermodel.cpp" line="295"/>
+        <location filename="../model/foldermodel.cpp" line="277"/>
         <source>%1 item</source>
         <translation>%1 项</translation>
     </message>
     <message>
-        <location filename="../model/foldermodel.cpp" line="295"/>
+        <location filename="../model/foldermodel.cpp" line="277"/>
         <source>%1 items</source>
         <translation>%1 项</translation>
     </message>
     <message>
-        <location filename="../model/foldermodel.cpp" line="400"/>
+        <location filename="../model/foldermodel.cpp" line="382"/>
         <source>The file or folder %1 does not exist.</source>
         <translation>文件或文件夹 %1 不存在</translation>
     </message>
     <message>
-        <location filename="../model/foldermodel.cpp" line="1256"/>
+        <location filename="../model/foldermodel.cpp" line="1269"/>
         <source>Select All</source>
         <translation>全选</translation>
     </message>
     <message>
-        <location filename="../model/foldermodel.cpp" line="1373"/>
         <source>File Manager</source>
-        <translation>文件管理器</translation>
+        <translation type="vanished">文件管理器</translation>
     </message>
     <message>
-        <location filename="../model/foldermodel.cpp" line="1691"/>
+        <location filename="../model/foldermodel.cpp" line="1762"/>
         <source>Open</source>
         <translation>打开</translation>
     </message>
     <message>
-        <location filename="../model/foldermodel.cpp" line="1694"/>
+        <location filename="../model/foldermodel.cpp" line="1765"/>
         <source>Open with</source>
         <translation>打开方式</translation>
     </message>
     <message>
-        <location filename="../model/foldermodel.cpp" line="1697"/>
+        <location filename="../model/foldermodel.cpp" line="1768"/>
         <source>Cut</source>
         <translation>剪切</translation>
     </message>
     <message>
-        <location filename="../model/foldermodel.cpp" line="1700"/>
+        <location filename="../model/foldermodel.cpp" line="1771"/>
         <source>Copy</source>
         <translation>复制</translation>
     </message>
     <message>
-        <location filename="../model/foldermodel.cpp" line="1703"/>
+        <location filename="../model/foldermodel.cpp" line="1774"/>
         <source>Paste</source>
         <translation>粘贴</translation>
     </message>
     <message>
-        <location filename="../model/foldermodel.cpp" line="898"/>
-        <location filename="../model/foldermodel.cpp" line="1706"/>
+        <location filename="../model/foldermodel.cpp" line="881"/>
+        <location filename="../model/foldermodel.cpp" line="1777"/>
         <source>New Folder</source>
         <translation>新建文件夹</translation>
     </message>
     <message>
-        <location filename="../model/foldermodel.cpp" line="920"/>
-        <location filename="../model/foldermodel.cpp" line="1710"/>
+        <location filename="../model/foldermodel.cpp" line="902"/>
+        <location filename="../model/foldermodel.cpp" line="1781"/>
         <source>New Text</source>
         <translation>新建文本</translation>
     </message>
     <message>
-        <location filename="../model/foldermodel.cpp" line="1259"/>
-        <location filename="../model/foldermodel.cpp" line="1709"/>
+        <location filename="../model/foldermodel.cpp" line="1275"/>
+        <location filename="../model/foldermodel.cpp" line="1780"/>
         <source>New Documents</source>
         <translation>新建文档</translation>
     </message>
     <message>
-        <location filename="../model/foldermodel.cpp" line="1714"/>
+        <location filename="../model/foldermodel.cpp" line="1785"/>
         <source>Move To Trash</source>
         <translation>移动到回收站</translation>
     </message>
     <message>
-        <location filename="../model/foldermodel.cpp" line="1717"/>
+        <location filename="../model/foldermodel.cpp" line="1788"/>
         <source>Empty Trash</source>
         <translation>清空回收站</translation>
     </message>
     <message>
-        <location filename="../model/foldermodel.cpp" line="1720"/>
+        <location filename="../model/foldermodel.cpp" line="1791"/>
         <source>Delete</source>
         <translation>删除</translation>
     </message>
     <message>
-        <location filename="../model/foldermodel.cpp" line="1723"/>
+        <location filename="../model/foldermodel.cpp" line="1794"/>
         <source>Rename</source>
         <translation>重命名</translation>
     </message>
     <message>
-        <location filename="../model/foldermodel.cpp" line="1726"/>
+        <location filename="../model/foldermodel.cpp" line="1797"/>
         <source>Open in Terminal</source>
         <translation>在终端中打开</translation>
     </message>
     <message>
-        <location filename="../model/foldermodel.cpp" line="1729"/>
+        <location filename="../model/foldermodel.cpp" line="1800"/>
         <source>Set as Wallpaper</source>
         <translation>设置为壁纸</translation>
     </message>
     <message>
-        <location filename="../model/foldermodel.cpp" line="1732"/>
+        <location filename="../model/foldermodel.cpp" line="1803"/>
         <source>Properties</source>
         <translation>属性</translation>
     </message>
     <message>
-        <location filename="../model/foldermodel.cpp" line="1735"/>
+        <location filename="../model/foldermodel.cpp" line="1806"/>
         <source>Change background</source>
         <translation>更改桌面背景</translation>
     </message>
     <message>
-        <location filename="../model/foldermodel.cpp" line="1738"/>
+        <location filename="../model/foldermodel.cpp" line="1809"/>
         <source>Restore</source>
         <translation>恢复</translation>
     </message>
     <message>
-        <location filename="../model/foldermodel.cpp" line="1741"/>
+        <location filename="../model/foldermodel.cpp" line="1812"/>
         <source>Show hidden files</source>
         <translation>显示隐藏文件</translation>
     </message>
     <message>
-        <location filename="../model/foldermodel.cpp" line="1746"/>
+        <location filename="../model/foldermodel.cpp" line="1817"/>
         <source>Open in new window</source>
         <translation>在新窗口中打开</translation>
     </message>
@@ -253,98 +254,108 @@
 <context>
     <name>FolderPage</name>
     <message>
-        <location filename="../qml/FolderPage.qml" line="147"/>
+        <location filename="../qml/FolderPage.qml" line="85"/>
         <source>Empty folder</source>
         <translation>空文件夹</translation>
     </message>
     <message>
-        <location filename="../qml/FolderPage.qml" line="200"/>
+        <location filename="../qml/FolderPage.qml" line="164"/>
         <source>Open</source>
         <translation>打开</translation>
     </message>
     <message>
-        <location filename="../qml/FolderPage.qml" line="64"/>
-        <location filename="../qml/FolderPage.qml" line="205"/>
+        <location filename="../qml/FolderPage.qml" line="42"/>
+        <location filename="../qml/FolderPage.qml" line="168"/>
+        <location filename="../qml/FolderPage.qml" line="168"/>
         <source>Properties</source>
         <translation>属性</translation>
     </message>
     <message>
-        <location filename="../qml/FolderPage.qml" line="54"/>
+        <location filename="../qml/FolderPage.qml" line="39"/>
         <source>File</source>
         <translation>文件</translation>
     </message>
     <message>
-        <location filename="../qml/FolderPage.qml" line="57"/>
+        <location filename="../qml/FolderPage.qml" line="40"/>
         <source>New Folder</source>
         <translation>新建文件夹</translation>
     </message>
     <message>
-        <location filename="../qml/FolderPage.qml" line="71"/>
+        <location filename="../qml/FolderPage.qml" line="44"/>
         <source>Quit</source>
         <translation>退出</translation>
     </message>
     <message>
-        <location filename="../qml/FolderPage.qml" line="77"/>
+        <location filename="../qml/FolderPage.qml" line="47"/>
         <source>Edit</source>
         <translation>编辑</translation>
     </message>
     <message>
-        <location filename="../qml/FolderPage.qml" line="80"/>
+        <location filename="../qml/FolderPage.qml" line="48"/>
         <source>Select All</source>
         <translation>全选</translation>
     </message>
     <message>
-        <location filename="../qml/FolderPage.qml" line="87"/>
+        <location filename="../qml/FolderPage.qml" line="50"/>
         <source>Cut</source>
         <translation>剪切</translation>
     </message>
     <message>
-        <location filename="../qml/FolderPage.qml" line="92"/>
+        <location filename="../qml/FolderPage.qml" line="51"/>
         <source>Copy</source>
         <translation>复制</translation>
     </message>
     <message>
-        <location filename="../qml/FolderPage.qml" line="97"/>
+        <location filename="../qml/FolderPage.qml" line="52"/>
         <source>Paste</source>
         <translation>粘贴</translation>
     </message>
     <message>
-        <location filename="../qml/FolderPage.qml" line="103"/>
+        <location filename="../qml/FolderPage.qml" line="55"/>
         <source>Help</source>
         <translation>帮助</translation>
     </message>
     <message>
-        <location filename="../qml/FolderPage.qml" line="106"/>
+        <location filename="../qml/FolderPage.qml" line="56"/>
         <source>About</source>
         <translation>关于</translation>
     </message>
     <message>
-        <location filename="../qml/FolderPage.qml" line="114"/>
+        <location filename="../qml/FolderPage.qml" line="63"/>
+        <source>About File Manager</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/FolderPage.qml" line="68"/>
+        <source>File Manager
+A file manager designed for CutefishOS.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>File Manager</source>
-        <translation>文件管理器</translation>
+        <translation type="vanished">文件管理器</translation>
     </message>
     <message>
-        <location filename="../qml/FolderPage.qml" line="115"/>
         <source>A file manager designed for CutefishOS.</source>
-        <translation>专为 CutefishOS 打造的文件管理器</translation>
+        <translation type="vanished">专为 CutefishOS 打造的文件管理器</translation>
     </message>
     <message>
-        <location filename="../qml/FolderPage.qml" line="268"/>
+        <location filename="../qml/FolderPage.qml" line="224"/>
         <source>%1 item</source>
         <translation>%1 项</translation>
     </message>
     <message>
-        <location filename="../qml/FolderPage.qml" line="269"/>
+        <location filename="../qml/FolderPage.qml" line="225"/>
         <source>%1 items</source>
         <translation>%1 项</translation>
     </message>
     <message>
-        <location filename="../qml/FolderPage.qml" line="275"/>
+        <location filename="../qml/FolderPage.qml" line="230"/>
         <source>%1 selected</source>
         <translation>选中了 %1 项</translation>
     </message>
     <message>
-        <location filename="../qml/FolderPage.qml" line="300"/>
+        <location filename="../qml/FolderPage.qml" line="250"/>
         <source>Empty Trash</source>
         <translation>清空回收站</translation>
     </message>
@@ -352,22 +363,22 @@
 <context>
     <name>OpenWithDialog</name>
     <message>
-        <location filename="../qml/Dialogs/OpenWithDialog.qml" line="80"/>
+        <location filename="../qml/Dialogs/OpenWithDialog.qml" line="73"/>
         <source>No applications</source>
         <translation>没有应用程序</translation>
     </message>
     <message>
-        <location filename="../qml/Dialogs/OpenWithDialog.qml" line="144"/>
+        <location filename="../qml/Dialogs/OpenWithDialog.qml" line="136"/>
         <source>Set as default</source>
         <translation>设置为默认</translation>
     </message>
     <message>
-        <location filename="../qml/Dialogs/OpenWithDialog.qml" line="159"/>
+        <location filename="../qml/Dialogs/OpenWithDialog.qml" line="150"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../qml/Dialogs/OpenWithDialog.qml" line="168"/>
+        <location filename="../qml/Dialogs/OpenWithDialog.qml" line="159"/>
         <source>Open</source>
         <translation>打开</translation>
     </message>
@@ -380,32 +391,32 @@
 <context>
     <name>OptionsMenu</name>
     <message>
-        <location filename="../qml/OptionsMenu.qml" line="47"/>
+        <location filename="../qml/OptionsMenu.qml" line="21"/>
         <source>Icons</source>
         <translation>图标视图</translation>
     </message>
     <message>
-        <location filename="../qml/OptionsMenu.qml" line="85"/>
+        <location filename="../qml/OptionsMenu.qml" line="42"/>
         <source>List</source>
         <translation>列表视图</translation>
     </message>
     <message>
-        <location filename="../qml/OptionsMenu.qml" line="127"/>
+        <location filename="../qml/OptionsMenu.qml" line="58"/>
         <source>Name</source>
         <translation>名称</translation>
     </message>
     <message>
-        <location filename="../qml/OptionsMenu.qml" line="165"/>
+        <location filename="../qml/OptionsMenu.qml" line="72"/>
         <source>Date</source>
         <translation>日期</translation>
     </message>
     <message>
-        <location filename="../qml/OptionsMenu.qml" line="189"/>
+        <location filename="../qml/OptionsMenu.qml" line="86"/>
         <source>Type</source>
         <translation>类型</translation>
     </message>
     <message>
-        <location filename="../qml/OptionsMenu.qml" line="227"/>
+        <location filename="../qml/OptionsMenu.qml" line="100"/>
         <source>Size</source>
         <translation>大小</translation>
     </message>
@@ -467,47 +478,47 @@
 <context>
     <name>PropertiesDialog</name>
     <message>
-        <location filename="../qml/Dialogs/PropertiesDialog.qml" line="100"/>
+        <location filename="../qml/Dialogs/PropertiesDialog.qml" line="76"/>
         <source>Type:</source>
         <translation>类型:</translation>
     </message>
     <message>
-        <location filename="../qml/Dialogs/PropertiesDialog.qml" line="113"/>
+        <location filename="../qml/Dialogs/PropertiesDialog.qml" line="79"/>
         <source>Location:</source>
         <translation>位置:</translation>
     </message>
     <message>
-        <location filename="../qml/Dialogs/PropertiesDialog.qml" line="124"/>
+        <location filename="../qml/Dialogs/PropertiesDialog.qml" line="82"/>
         <source>Size:</source>
         <translation>大小:</translation>
     </message>
     <message>
-        <location filename="../qml/Dialogs/PropertiesDialog.qml" line="131"/>
+        <location filename="../qml/Dialogs/PropertiesDialog.qml" line="83"/>
         <source>Calculating...</source>
         <translation>计算中...</translation>
     </message>
     <message>
-        <location filename="../qml/Dialogs/PropertiesDialog.qml" line="135"/>
+        <location filename="../qml/Dialogs/PropertiesDialog.qml" line="85"/>
         <source>Created:</source>
         <translation>创建时间:</translation>
     </message>
     <message>
-        <location filename="../qml/Dialogs/PropertiesDialog.qml" line="148"/>
+        <location filename="../qml/Dialogs/PropertiesDialog.qml" line="88"/>
         <source>Modified:</source>
         <translation>修改时间:</translation>
     </message>
     <message>
-        <location filename="../qml/Dialogs/PropertiesDialog.qml" line="161"/>
+        <location filename="../qml/Dialogs/PropertiesDialog.qml" line="91"/>
         <source>Accessed:</source>
         <translation>访问时间:</translation>
     </message>
     <message>
-        <location filename="../qml/Dialogs/PropertiesDialog.qml" line="183"/>
+        <location filename="../qml/Dialogs/PropertiesDialog.qml" line="102"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../qml/Dialogs/PropertiesDialog.qml" line="189"/>
+        <location filename="../qml/Dialogs/PropertiesDialog.qml" line="108"/>
         <source>OK</source>
         <translation>确定</translation>
     </message>
@@ -515,22 +526,22 @@
 <context>
     <name>SideBar</name>
     <message>
-        <location filename="../qml/SideBar.qml" line="126"/>
+        <location filename="../qml/SideBar.qml" line="116"/>
         <source>Open</source>
         <translation>打开</translation>
     </message>
     <message>
-        <location filename="../qml/SideBar.qml" line="137"/>
+        <location filename="../qml/SideBar.qml" line="126"/>
         <source>Open in new window</source>
         <translation>在新窗口中打开</translation>
     </message>
     <message>
-        <location filename="../qml/SideBar.qml" line="151"/>
+        <location filename="../qml/SideBar.qml" line="136"/>
         <source>Eject</source>
         <translation>弹出</translation>
     </message>
     <message>
-        <location filename="../qml/SideBar.qml" line="164"/>
+        <location filename="../qml/SideBar.qml" line="144"/>
         <source>Unmount</source>
         <translation>卸载</translation>
     </message>
@@ -538,7 +549,7 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../qml/main.qml" line="35"/>
+        <location filename="../qml/main.qml" line="20"/>
         <source>File Manager</source>
         <translation>文件管理器</translation>
     </message>

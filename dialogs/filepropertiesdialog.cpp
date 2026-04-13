@@ -223,9 +223,9 @@ void FilePropertiesDialog::init()
         m_size = KIO::convertSize(m_items.first().size());
         m_location = info.dir().path();
 
-        m_creationTime = info.birthTime().toString(Qt::SystemLocaleLongDate);
-        m_modifiedTime = info.lastModified().toString(Qt::SystemLocaleLongDate);
-        m_accessedTime = info.lastRead().toString(Qt::SystemLocaleLongDate);
+        m_creationTime = info.birthTime().toString(QLocale().dateTimeFormat(QLocale::LongFormat));
+        m_modifiedTime = info.lastModified().toString(QLocale().dateTimeFormat(QLocale::LongFormat));
+        m_accessedTime = info.lastRead().toString(QLocale().dateTimeFormat(QLocale::LongFormat));
 
 //        m_creationTime = item.time(KFileItem::CreationTime).toString();
 //        m_modifiedTime = item.time(KFileItem::ModificationTime).toString();

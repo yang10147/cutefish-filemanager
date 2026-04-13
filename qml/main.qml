@@ -1,31 +1,16 @@
 /*
  * Copyright (C) 2021 CutefishOS Team.
- *
- * Author:     revenmartin <revenmartin@gmail.com>
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * Qt6/Wayland port 2026 - FishUI.Window → ApplicationWindow
  */
 
-import QtQuick 2.12
-import QtQuick.Controls 2.12
-import QtQuick.Layouts 1.12
-import QtQuick.Window 2.12
-import FishUI 1.0 as FishUI
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+import QtQuick.Window
 
 import "./Controls"
 
-FishUI.Window {
+ApplicationWindow {
     id: root
     width: settings.width
     height: settings.height
@@ -34,14 +19,14 @@ FishUI.Window {
     visible: true
     title: qsTr("File Manager")
 
-    background.opacity: 1
-    header.height: 36 + FishUI.Units.largeSpacing
+    // 系统原生标题栏，无需自定义 header
 
     LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
     LayoutMirroring.childrenInherit: true
 
-    property QtObject settings: GlobalSettings { }
+    property QtObject settings: GlobalSettings {}
 
+    // 保存窗口尺寸
     onClosing: {
         if (root.visibility !== Window.Maximized &&
                 root.visibility !== Window.FullScreen) {
@@ -50,60 +35,65 @@ FishUI.Window {
         }
     }
 
-    OptionsMenu {
-        id: optionsMenu
-    }
+    // 工具栏（原 headerItem）
+    header: ToolBar {
+        height: 44
+        background: Rectangle {
+            color: Theme.secondBackgroundColor
+        }
 
-    headerItem: Item {
         RowLayout {
             anchors.fill: parent
-            anchors.leftMargin: FishUI.Units.smallSpacing * 1.5
-            anchors.rightMargin: FishUI.Units.smallSpacing * 1.5
-            anchors.topMargin: FishUI.Units.smallSpacing * 1.5
-            anchors.bottomMargin: FishUI.Units.smallSpacing * 1.5
+            anchors.leftMargin: Theme.smallSpacing * 1.5
+            anchors.rightMargin: Theme.smallSpacing * 1.5
+            anchors.topMargin: Theme.smallSpacing
+            anchors.bottomMargin: Theme.smallSpacing
+            spacing: Theme.smallSpacing
 
-            spacing: FishUI.Units.smallSpacing
-
+            // 后退
             IconButton {
                 Layout.fillHeight: true
                 implicitWidth: height
-                source: FishUI.Theme.darkMode ? "qrc:/images/dark/go-previous.svg"
-                                              : "qrc:/images/light/go-previous.svg"
+                source: Theme.darkMode ? "qrc:/images/dark/go-previous.svg"
+                                       : "qrc:/images/light/go-previous.svg"
                 onClicked: _folderPage.goBack()
             }
 
+            // 前进
             IconButton {
                 Layout.fillHeight: true
                 implicitWidth: height
-                source: FishUI.Theme.darkMode ? "qrc:/images/dark/go-next.svg"
-                                              : "qrc:/images/light/go-next.svg"
+                source: Theme.darkMode ? "qrc:/images/dark/go-next.svg"
+                                       : "qrc:/images/light/go-next.svg"
                 onClicked: _folderPage.goForward()
             }
 
+            // 路径栏
             PathBar {
                 id: _pathBar
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                onItemClicked: _folderPage.openUrl(path)
-                onEditorAccepted: _folderPage.openUrl(path)
+                onItemClicked: (path) => _folderPage.openUrl(path)
+                onEditorAccepted: (path) => _folderPage.openUrl(path)
             }
 
+            // 视图切换 + 选项菜单
             IconButton {
                 Layout.fillHeight: true
                 implicitWidth: height
-
-                property var gridSource: FishUI.Theme.darkMode ? "qrc:/images/dark/grid.svg" : "qrc:/images/light/grid.svg"
-                property var listSource: FishUI.Theme.darkMode ? "qrc:/images/dark/list.svg" : "qrc:/images/light/list.svg"
-
-                source: settings.viewMethod === 0 ? listSource : gridSource
-
-                onClicked: {
-                    optionsMenu.popup()
-                }
+                source: settings.viewMethod === 0
+                        ? (Theme.darkMode ? "qrc:/images/dark/list.svg" : "qrc:/images/light/list.svg")
+                        : (Theme.darkMode ? "qrc:/images/dark/grid.svg" : "qrc:/images/light/grid.svg")
+                onClicked: optionsMenu.popup()
             }
         }
     }
 
+    OptionsMenu {
+        id: optionsMenu
+    }
+
+    // 主体内容
     RowLayout {
         anchors.fill: parent
         spacing: 0
@@ -111,9 +101,16 @@ FishUI.Window {
         SideBar {
             id: _sideBar
             Layout.fillHeight: true
-            width: 180 + FishUI.Units.largeSpacing
-            onClicked: _folderPage.openUrl(path)
-            onOpenInNewWindow: _folderPage.model.openInNewWindow(path)
+            width: 188
+            onClicked: (path) => _folderPage.openUrl(path)
+            onOpenInNewWindow: (path) => _folderPage.model.openInNewWindow(path)
+        }
+
+        // 分隔线
+        Rectangle {
+            Layout.fillHeight: true
+            width: 1
+            color: Theme.darkMode ? Qt.rgba(1,1,1,0.08) : Qt.rgba(0,0,0,0.08)
         }
 
         FolderPage {
@@ -124,9 +121,7 @@ FishUI.Window {
                 _sideBar.updateSelection(currentUrl)
                 _pathBar.updateUrl(currentUrl)
             }
-            onRequestPathEditor: {
-                _pathBar.openEditor()
-            }
+            onRequestPathEditor: _pathBar.openEditor()
         }
     }
 }

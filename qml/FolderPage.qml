@@ -1,30 +1,18 @@
 /*
- * Copyright (C) 2021 CutefishOS Team.
- *
- * Author:     revenmartin <revenmartin@gmail.com>
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * Qt6/Wayland port 2026 - FishUI 已移除
+ * FishUI.DesktopMenu  → Menu
+ * FishUI.BusyIndicator → BusyIndicator
+ * FishUI.AboutDialog  → Dialog
+ * FishUI.Theme/Units  → Theme singleton
+ * image://icontheme   → 保留（KDE 环境支持）
  */
 
-import QtQuick 2.12
-import QtQuick.Controls 2.12
-import QtQuick.Layouts 1.12
-import QtGraphicalEffects 1.0
-import Qt.labs.platform 1.0
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+import Qt.labs.platform as Platform
 
 import Cutefish.FileManager 1.0 as FM
-import FishUI 1.0 as FishUI
 
 import "./Dialogs"
 
@@ -41,105 +29,55 @@ Item {
     onCurrentUrlChanged: {
         if (!_viewLoader.item)
             return
-
         _viewLoader.item.reset()
         _viewLoader.item.forceActiveFocus()
     }
 
     // Global Menu
-    MenuBar {
-        id: appMenu
-
-        Menu {
+    Platform.MenuBar {
+        Platform.Menu {
             title: qsTr("File")
-
-            MenuItem {
-                text: qsTr("New Folder")
-                onTriggered: dirModel.newFolder()
-            }
-
-            MenuSeparator {}
-
-            MenuItem {
-                text: qsTr("Properties")
-                onTriggered: dirModel.openPropertiesDialog()
-            }
-
-            MenuSeparator {}
-
-            MenuItem {
-                text: qsTr("Quit")
-                onTriggered: root.close()
-            }
+            Platform.MenuItem { text: qsTr("New Folder");  onTriggered: dirModel.newFolder() }
+            Platform.MenuSeparator {}
+            Platform.MenuItem { text: qsTr("Properties"); onTriggered: dirModel.openPropertiesDialog() }
+            Platform.MenuSeparator {}
+            Platform.MenuItem { text: qsTr("Quit");       onTriggered: root.close() }
         }
-
-        Menu {
+        Platform.Menu {
             title: qsTr("Edit")
-
-            MenuItem {
-                text: qsTr("Select All")
-                onTriggered: dirModel.selectAll()
-            }
-
-            MenuSeparator {}
-
-            MenuItem {
-                text: qsTr("Cut")
-                onTriggered: dirModel.cut()
-            }
-
-            MenuItem {
-                text: qsTr("Copy")
-                onTriggered: dirModel.copy()
-            }
-
-            MenuItem {
-                text: qsTr("Paste")
-                onTriggered: dirModel.paste()
-            }
+            Platform.MenuItem { text: qsTr("Select All"); onTriggered: dirModel.selectAll() }
+            Platform.MenuSeparator {}
+            Platform.MenuItem { text: qsTr("Cut");        onTriggered: dirModel.cut() }
+            Platform.MenuItem { text: qsTr("Copy");       onTriggered: dirModel.copy() }
+            Platform.MenuItem { text: qsTr("Paste");      onTriggered: dirModel.paste() }
         }
-
-        Menu {
+        Platform.Menu {
             title: qsTr("Help")
-
-            MenuItem {
-                text: qsTr("About")
-                onTriggered: _aboutDialog.show()
-            }
+            Platform.MenuItem { text: qsTr("About"); onTriggered: _aboutDialog.open() }
         }
     }
 
-    FishUI.AboutDialog {
+    // About dialog（替代 FishUI.AboutDialog）
+    Dialog {
         id: _aboutDialog
-        name: qsTr("File Manager")
-        description: qsTr("A file manager designed for CutefishOS.")
-        iconSource: "image://icontheme/file-system-manager"
+        title: qsTr("About File Manager")
+        modal: true
+        anchors.centerIn: parent
+
+        Label {
+            text: qsTr("File Manager\nA file manager designed for CutefishOS.")
+            wrapMode: Text.Wrap
+        }
+
+        standardButtons: Dialog.Ok
     }
 
     Rectangle {
         id: _background
         anchors.fill: parent
         anchors.rightMargin: 1
-        radius: FishUI.Theme.mediumRadius
-        color: FishUI.Theme.secondBackgroundColor
-
-        Rectangle {
-            id: _topRightRect
-            anchors.right: parent.right
-            anchors.top: parent.top
-            height: FishUI.Theme.mediumRadius
-            width: FishUI.Theme.mediumRadius
-            color: FishUI.Theme.secondBackgroundColor
-        }
-
-        Rectangle {
-            id: _bottomLeftRect
-            anchors.left: parent.left
-            anchors.bottom: parent.bottom
-            height: FishUI.Theme.mediumRadius
-            width: FishUI.Theme.mediumRadius
-            color: FishUI.Theme.secondBackgroundColor
-        }
+        radius: Theme.mediumRadius
+        color: Theme.secondBackgroundColor
     }
 
     Label {
@@ -156,7 +94,6 @@ Item {
         id: dirModel
         viewAdapter: viewAdapter
         sortMode: settings.sortMode
-        // showHiddenFiles: settings.showHiddenFiles
 
         Component.onCompleted: {
             if (arg)
@@ -165,7 +102,6 @@ Item {
                 dirModel.url = dirModel.homePath()
         }
 
-        // For new folder rename.
         onCurrentIndexChanged: {
             _viewLoader.item.currentIndex = dirModel.currentIndex
         }
@@ -175,32 +111,59 @@ Item {
         target: dirModel
 
         function onNotification(text) {
-            root.showPassiveNotification(text, 3000)
+            // 简单用 ToolTip 显示通知
+            notificationTimer.stop()
+            notificationLabel.text = text
+            notificationLabel.visible = true
+            notificationTimer.start()
         }
 
-        // Scroll to item.
         function onScrollToItem(index) {
             _viewLoader.item.currentIndex = index
+        }
+    }
+
+    // 通知条
+    Label {
+        id: notificationLabel
+        anchors.top: parent.top
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.topMargin: 8
+        padding: 6
+        visible: false
+        z: 999
+        background: Rectangle {
+            color: Theme.highlightColor
+            radius: Theme.smallRadius
+        }
+        color: Theme.highlightedTextColor
+        Timer {
+            id: notificationTimer
+            interval: 3000
+            onTriggered: notificationLabel.visible = false
         }
     }
 
     FM.ItemViewAdapter {
         id: viewAdapter
         adapterView: _viewLoader.item
-        adapterModel: _viewLoader.item.positioner ? _viewLoader.item.positioner : dirModel
+        adapterModel: _viewLoader.item && _viewLoader.item.positioner
+                      ? _viewLoader.item.positioner : dirModel
         adapterIconSize: 40
-        adapterVisibleArea: Qt.rect(_viewLoader.item.contentX, _viewLoader.item.contentY,
-                                    _viewLoader.item.contentWidth, _viewLoader.item.contentHeight)
+        adapterVisibleArea: _viewLoader.item
+                            ? Qt.rect(_viewLoader.item.contentX, _viewLoader.item.contentY,
+                                      _viewLoader.item.contentWidth, _viewLoader.item.contentHeight)
+                            : Qt.rect(0, 0, 0, 0)
     }
 
-    FishUI.DesktopMenu {
+    // 右键菜单（空白区域）
+    Menu {
         id: folderMenu
 
         MenuItem {
             text: qsTr("Open")
             onTriggered: dirModel.openSelected()
         }
-
         MenuItem {
             text: qsTr("Properties")
             onTriggered: dirModel.openPropertiesDialog()
@@ -217,26 +180,28 @@ Item {
             Layout.fillWidth: true
             Layout.fillHeight: true
             asynchronous: true
-            sourceComponent: switch (settings.viewMethod) {
-                             case 0: return _listViewComponent
-                             case 1: return _gridViewComponent
-                             }
+            sourceComponent: {
+                switch (settings.viewMethod) {
+                    case 0: return _listViewComponent
+                    case 1: return _gridViewComponent
+                }
+            }
 
             onSourceComponentChanged: {
-                // Focus
-                _viewLoader.item.forceActiveFocus()
-
-                // ShortCut
-                shortCut.install(_viewLoader.item)
+                if (_viewLoader.item) {
+                    _viewLoader.item.forceActiveFocus()
+                    shortCut.install(_viewLoader.item)
+                }
             }
         }
 
+        // 状态栏占位
         Item {
-            visible: true
             height: statusBarHeight
         }
     }
 
+    // 状态栏
     Item {
         id: _statusBar
         anchors.left: parent.left
@@ -245,40 +210,28 @@ Item {
         height: statusBarHeight
         z: 999
 
-//        Rectangle {
-//            anchors.fill: parent
-//            color: FishUI.Theme.backgroundColor
-//            opacity: 0.7
-//        }
-
-        MouseArea {
-            anchors.fill: parent
-        }
+        MouseArea { anchors.fill: parent }
 
         RowLayout {
             anchors.fill: parent
-            anchors.leftMargin: FishUI.Units.smallSpacing
-            anchors.rightMargin: FishUI.Units.smallSpacing
-            // anchors.bottomMargin: 1
-            spacing: FishUI.Units.largeSpacing
+            anchors.leftMargin: Theme.smallSpacing
+            anchors.rightMargin: Theme.smallSpacing
+            spacing: Theme.largeSpacing
 
             Label {
-                Layout.alignment: Qt.AlignLeft
                 font.pointSize: 10
-                text: dirModel.count === 1 ? qsTr("%1 item").arg(dirModel.count)
-                                           : qsTr("%1 items").arg(dirModel.count)
+                text: dirModel.count === 1
+                      ? qsTr("%1 item").arg(dirModel.count)
+                      : qsTr("%1 items").arg(dirModel.count)
             }
 
             Label {
-                Layout.alignment: Qt.AlignLeft
                 font.pointSize: 10
                 text: qsTr("%1 selected").arg(dirModel.selectionCount)
                 visible: dirModel.selectionCount >= 1
             }
 
-            FishUI.BusyIndicator {
-                id: _busyIndicator
-                Layout.alignment: Qt.AlignLeft
+            BusyIndicator {
                 height: statusBarHeight
                 width: height
                 running: visible
@@ -290,12 +243,9 @@ Item {
                 visible: dirModel.url !== "trash:///"
             }
 
-            Item {
-                Layout.fillWidth: true
-            }
+            Item { Layout.fillWidth: true }
 
             Button {
-                id: _emptyTrashBtn
                 implicitHeight: statusBarHeight
                 text: qsTr("Empty Trash")
                 font.pointSize: 10
@@ -320,23 +270,16 @@ Item {
         id: _gridViewComponent
 
         FolderGridView {
-            id: _gridView
             model: dirModel
             delegate: FolderGridItem {}
 
-            leftMargin: FishUI.Units.smallSpacing
-            rightMargin: FishUI.Units.largeSpacing
+            leftMargin: Theme.smallSpacing
+            rightMargin: Theme.largeSpacing
             topMargin: 0
-            bottomMargin: FishUI.Units.smallSpacing
+            bottomMargin: Theme.smallSpacing
 
-            onIconSizeChanged: {
-                // Save
-                settings.gridIconSize = _gridView.iconSize
-            }
-
-            onCountChanged: {
-                _fileTips.visible = count === 0
-            }
+            onIconSizeUpdated: settings.gridIconSize = iconSize
+            onCountChanged: _fileTips.visible = count === 0
         }
     }
 
@@ -344,19 +287,15 @@ Item {
         id: _listViewComponent
 
         FolderListView {
-            id: _folderListView
             model: dirModel
 
-            topMargin: FishUI.Units.smallSpacing
-            leftMargin: FishUI.Units.largeSpacing
-            rightMargin: FishUI.Units.largeSpacing
-            bottomMargin: FishUI.Units.smallSpacing
-            spacing: FishUI.Units.largeSpacing
+            topMargin: Theme.smallSpacing
+            leftMargin: Theme.largeSpacing
+            rightMargin: Theme.largeSpacing
+            bottomMargin: Theme.smallSpacing
+            spacing: Theme.largeSpacing
 
-            onCountChanged: {
-                _fileTips.visible = count === 0
-            }
-
+            onCountChanged: _fileTips.visible = count === 0
             delegate: FolderListItem {}
         }
     }
@@ -365,33 +304,20 @@ Item {
         id: rubberBandObject
 
         FM.RubberBand {
-            id: rubberBand
+            width: 0; height: 0; z: 99999
+            color: Theme.highlightColor
 
-            width: 0
-            height: 0
-            z: 99999
-            color: FishUI.Theme.highlightColor
-
-            function close() {
-                opacityAnimation.restart()
-            }
+            function close() { opacityAnimation.restart() }
 
             OpacityAnimator {
                 id: opacityAnimation
-                target: rubberBand
-                to: 0
-                from: 1
-                duration: 150
-
-                easing {
-                    bezierCurve: [0.4, 0.0, 1, 1]
-                    type: Easing.Bezier
-                }
-
+                target: parent
+                to: 0; from: 1; duration: 150
+                easing { bezierCurve: [0.4, 0.0, 1, 1]; type: Easing.Bezier }
                 onFinished: {
-                    rubberBand.visible = false
-                    rubberBand.enabled = false
-                    rubberBand.destroy()
+                    parent.visible = false
+                    parent.enabled = false
+                    parent.destroy()
                 }
             }
         }
@@ -399,61 +325,28 @@ Item {
 
     FM.ShortCut {
         id: shortCut
-
-        onOpen: {
-            dirModel.openSelected()
-        }
-        onCopy: {
-            dirModel.copy()
-        }
-        onCut: {
-            dirModel.cut()
-        }
-        onPaste: {
-            dirModel.paste()
-        }
-        onRename: {
-            dirModel.requestRename()
-        }
-        onOpenPathEditor: {
-            folderPage.requestPathEditor()
-        }
-        onSelectAll: {
-            dirModel.selectAll()
-        }
-        onBackspace: {
-            dirModel.up()
-        }
-        onDeleteFile: {
-            dirModel.keyDeletePress()
-        }
-        onRefresh: {
-            dirModel.refresh()
-        }
-        onKeyPressed: {
-            dirModel.keyboardSearch(text)
-        }
-        onShowHidden: {
-            dirModel.showHiddenFiles = !dirModel.showHiddenFiles
-        }
-        onClose: {
-            root.close()
-        }
-        onUndo: {
-            dirModel.undo()
-        }
+        onOpen:           dirModel.openSelected()
+        onCopy:           dirModel.copy()
+        onCut:            dirModel.cut()
+        onPaste:          dirModel.paste()
+        onRename:         dirModel.requestRename()
+        onOpenPathEditor: folderPage.requestPathEditor()
+        onSelectAll:      dirModel.selectAll()
+        onBackspace:      dirModel.up()
+        onDeleteFile:     dirModel.keyDeletePress()
+        onRefresh:        dirModel.refresh()
+        onKeyPressed: (text) => dirModel.keyboardSearch(text)
+        onShowHidden:     dirModel.showHiddenFiles = !dirModel.showHiddenFiles
+        onClose:          root.close()
+        onUndo:           dirModel.undo()
     }
 
     function openUrl(url) {
         dirModel.url = url
-        _viewLoader.item.forceActiveFocus()
+        if (_viewLoader.item)
+            _viewLoader.item.forceActiveFocus()
     }
 
-    function goBack() {
-        dirModel.goBack()
-    }
-
-    function goForward() {
-        dirModel.goForward()
-    }
+    function goBack()    { dirModel.goBack() }
+    function goForward() { dirModel.goForward() }
 }

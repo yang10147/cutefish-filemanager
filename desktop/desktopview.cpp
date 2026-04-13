@@ -37,8 +37,8 @@ DesktopView::DesktopView(QScreen *screen, QQuickView *parent)
     m_screenRect = m_screen->geometry();
     this->setFlag(Qt::FramelessWindowHint);
     this->setColor(QColor(Qt::transparent));
-    KWindowSystem::setType(winId(), NET::Desktop);
-    KWindowSystem::setState(winId(), NET::KeepBelow);
+    // KF6/Wayland: 用 Qt flags 替代 X11 专用 KWindowSystem API
+    this->setFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnBottomHint);
 
     engine()->rootContext()->setContextProperty("desktopView", this);
     engine()->rootContext()->setContextProperty("Dock", DockDBusInterface::self());
