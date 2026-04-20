@@ -20,6 +20,7 @@
 #include "desktopview.h"
 #include "dockdbusinterface.h"
 #include "thumbnailer/thumbnailprovider.h"
+#include "../desktopiconprovider.h"
 
 #include <QQmlEngine>
 #include <QQmlContext>
@@ -42,8 +43,9 @@ DesktopView::DesktopView(QScreen *screen, QQuickView *parent)
 
     engine()->rootContext()->setContextProperty("desktopView", this);
     engine()->rootContext()->setContextProperty("Dock", DockDBusInterface::self());
-    QWindow::fromWinId(winId())->setOpacity(0.99);
+
     engine()->addImageProvider("thumbnailer", new ThumbnailProvider());
+    engine()->addImageProvider("icontheme", new DesktopIconProvider());
 
     setTitle(tr("Desktop"));
     setScreen(m_screen);

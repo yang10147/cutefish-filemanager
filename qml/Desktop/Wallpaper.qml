@@ -6,7 +6,7 @@ import QtQuick
 
 Image {
     anchors.fill: parent
-    source: "file:///usr/share/backgrounds/cutefish/default.jpg"
+    source: "file:///usr/share/backgrounds/cutefishos/wallpaper-1.jpg"
     fillMode: Image.PreserveAspectCrop
     asynchronous: true
     cache: false
