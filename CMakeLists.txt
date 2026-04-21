@@ -12,6 +12,7 @@ find_package(Qt6 COMPONENTS Core DBus Quick LinguistTools REQUIRED)
 find_package(KF6KIO REQUIRED)
 find_package(KF6Solid REQUIRED)
 find_package(KF6WindowSystem REQUIRED)
+find_package(LayerShellQt REQUIRED)
 find_package(KF6Config REQUIRED)
 find_package(KF6XmlGui REQUIRED)
 find_package(KF6XmlGui REQUIRED)
@@ -70,6 +71,7 @@ target_link_libraries(cutefish-filemanager
     KF6::KIOWidgets
     KF6::Solid
     KF6::WindowSystem
+    LayerShellQt::Interface
     KF6::ConfigCore
     KF6::XmlGui
     KF6::XmlGui

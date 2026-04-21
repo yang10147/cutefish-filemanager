@@ -30,16 +30,18 @@
 #include <QScreen>
 
 #include <KWindowSystem>
+#include <LayerShellQt/Shell>
+#include <LayerShellQt/Window>
 
 DesktopView::DesktopView(QScreen *screen, QQuickView *parent)
     : QQuickView(parent)
     , m_screen(screen)
 {
     m_screenRect = m_screen->geometry();
+    // Wayland: 必须在窗口 show() 前调用，全局启用 LayerShell 协议
+    LayerShellQt::Shell::useLayerShell();
     this->setFlag(Qt::FramelessWindowHint);
     this->setColor(QColor(Qt::transparent));
-    // KF6/Wayland: 用 Qt flags 替代 X11 专用 KWindowSystem API
-    this->setFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnBottomHint);
 
     engine()->rootContext()->setContextProperty("desktopView", this);
     engine()->rootContext()->setContextProperty("Dock", DockDBusInterface::self());
@@ -59,6 +61,19 @@ DesktopView::DesktopView(QScreen *screen, QQuickView *parent)
 
     connect(m_screen, &QScreen::virtualGeometryChanged, this, &DesktopView::onGeometryChanged);
     connect(m_screen, &QScreen::geometryChanged, this, &DesktopView::onGeometryChanged);
+
+    // 配置 LayerShell：Background 层，四面锚定铺满全屏，不推开其他窗口
+    if (auto *lsw = LayerShellQt::Window::get(this)) {
+        lsw->setLayer(LayerShellQt::Window::LayerBackground);
+        LayerShellQt::Window::Anchors anchors;
+        anchors.setFlag(LayerShellQt::Window::AnchorTop);
+        anchors.setFlag(LayerShellQt::Window::AnchorBottom);
+        anchors.setFlag(LayerShellQt::Window::AnchorLeft);
+        anchors.setFlag(LayerShellQt::Window::AnchorRight);
+        lsw->setAnchors(anchors);
+        lsw->setExclusiveZone(-1); // -1 = 不推开任何空间，其他窗口可以覆盖
+        lsw->setKeyboardInteractivity(LayerShellQt::Window::KeyboardInteractivityOnDemand);
+    }
 }
 
 QRect DesktopView::screenRect()
@@ -78,7 +93,7 @@ void DesktopView::onPrimaryScreenChanged(QScreen *screen)
 
 void DesktopView::onGeometryChanged()
 {
-    m_screenRect = m_screen->geometry().adjusted(0, 0, 1, 1);
+    m_screenRect = m_screen->geometry();
     setGeometry(m_screenRect);
     emit screenRectChanged();
 }

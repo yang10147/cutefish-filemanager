@@ -85,7 +85,7 @@
 <context>
     <name>DesktopView</name>
     <message>
-        <location filename="../desktop/desktopview.cpp" line="50"/>
+        <location filename="../desktop/desktopview.cpp" line="52"/>
         <source>Desktop</source>
         <translation>Skrivbord</translation>
     </message>
